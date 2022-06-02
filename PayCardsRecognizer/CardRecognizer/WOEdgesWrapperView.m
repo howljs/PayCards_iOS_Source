@@ -8,8 +8,8 @@
 
 #import "WOEdgesWrapperView.h"
 
-static const float kEdgesCornerPadding = 50.0;
-static const float kThickness = 5.0;
+static const float kEdgesCornerPadding = 44.0;
+static const float kThickness = 6.0;
 
 @implementation WOEdgesWrapperView
 
@@ -23,25 +23,25 @@ static const float kThickness = 5.0;
         
         _topEdge = [UIView new];
         _topEdge.backgroundColor = color;
-        _topEdge.layer.cornerRadius = kThickness / 2;
+//        _topEdge.layer.cornerRadius = kThickness / 2;
         
         [self addSubview:_topEdge];
         
         _bottomEdge = [UIView new];
         _bottomEdge.backgroundColor = color;
-        _bottomEdge.layer.cornerRadius = kThickness / 2;
+//        _bottomEdge.layer.cornerRadius = kThickness / 2;
         
         [self addSubview:_bottomEdge];
         
         _leftEdge = [UIView new];
         _leftEdge.backgroundColor = color;
-        _leftEdge.layer.cornerRadius = kThickness / 2;
+//        _leftEdge.layer.cornerRadius = kThickness / 2;
         
         [self addSubview:_leftEdge];
         
         _rightEdge = [UIView new];
         _rightEdge.backgroundColor = color;
-        _rightEdge.layer.cornerRadius = kThickness / 2;
+//        _rightEdge.layer.cornerRadius = kThickness / 2;
         
         [self addSubview:_rightEdge];
     }

@@ -589,6 +589,24 @@ NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString = SHAD
     }
 }
 
+- (void) toggleFlash
+{
+    AVCaptureDevice *flashLight = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if ([flashLight isTorchAvailable] && [flashLight isTorchModeSupported:AVCaptureTorchModeOn])
+    {
+        BOOL success = [flashLight lockForConfiguration:nil];
+        if (success)
+        {
+            if ([flashLight isTorchActive]) {
+                [flashLight setTorchMode:AVCaptureTorchModeOff];
+            } else {
+                [flashLight setTorchMode:AVCaptureTorchModeOn];
+            }
+            [flashLight unlockForConfiguration];
+        }
+    }
+}
+
 - (void)setFixedFocuse:(float)position completion:(void (^)(CMTime syncTime))handler
 {
     Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");

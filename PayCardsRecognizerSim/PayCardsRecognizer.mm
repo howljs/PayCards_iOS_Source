@@ -42,7 +42,7 @@
 @implementation PayCardsRecognizer
 
     
-- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor; {
+- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor isShowLayer:(BOOL)isShowLayer; {
     self = [super init];
     self.container = container;
     
@@ -52,7 +52,7 @@
     return self;
 }
 
-- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate recognizerMode:(PayCardsRecognizerDataMode)recognizerMode resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor; {
+- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate recognizerMode:(PayCardsRecognizerDataMode)recognizerMode resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor isShowLayer:(BOOL)isShowLayer; {
     self = [super init];
     
     return self;
@@ -73,6 +73,12 @@
 - (void)resumeRecognizer {}
 
 - (void)setOrientation:(UIInterfaceOrientation)orientation {}
+
+- (void)toggleFlash {};
+
+- (void)resetResult {};
+
+- (void)updateFrameColor:(UIColor * _Nonnull)frameColor {}
 
 - (void)turnTorchOn:(BOOL)on withValue:(float)value {}
 

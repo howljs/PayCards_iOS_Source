@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bMb-QI-OVL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bMb-QI-OVL">
     <device id="retina4_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,7 +44,7 @@ or stored on device</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUU-q1-110">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUU-q1-110">
                                         <rect key="frame" x="70.5" y="137.5" width="179" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Enter Card Details Manually"/>
@@ -79,7 +80,7 @@ or stored on device</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="R0X-O8-OuT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1cs-No-rqa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="R0X-O8-OuT" secondAttribute="bottom" id="7Eb-40-0oq"/>
@@ -164,7 +165,7 @@ or stored on device</string>
                                         <rect key="frame" x="15" y="61" width="305" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZL-Fj-QAK">
-                                                <rect key="frame" x="0.0" y="19.5" width="110" height="21"/>
+                                                <rect key="frame" x="0.0" y="19.5" width="109" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -212,7 +213,7 @@ or stored on device</string>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5v-xe-fnw">
                                         <rect key="frame" x="15" y="60" width="305" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="jdT-2S-KR0">
                                                 <userDefinedRuntimeAttributes>
@@ -225,7 +226,7 @@ or stored on device</string>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhB-wN-vkB">
                                         <rect key="frame" x="15" y="121" width="305" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="d9P-Uw-AEw">
                                                 <userDefinedRuntimeAttributes>
@@ -258,7 +259,7 @@ or stored on device</string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVl-cP-PHa">
                                 <rect key="frame" x="0.0" y="184" width="320" height="1"/>
-                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="separatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Wlj-oW-NOJ">
                                         <userDefinedRuntimeAttributes>
@@ -271,7 +272,7 @@ or stored on device</string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AVk-pv-Xk7">
                                 <rect key="frame" x="0.0" y="367" width="320" height="1"/>
-                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="separatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Qs9-bA-fYJ">
                                         <userDefinedRuntimeAttributes>
@@ -283,7 +284,7 @@ or stored on device</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="yt6-h4-l1T" firstAttribute="top" secondItem="QVl-cP-PHa" secondAttribute="bottom" id="0VC-S6-yHL"/>
                             <constraint firstAttribute="trailing" secondItem="QVl-cP-PHa" secondAttribute="trailing" id="3hv-ki-1uO"/>
@@ -336,8 +337,8 @@ or stored on device</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8q-Ia-xfM">
-                                <rect key="frame" x="94" y="325" width="132" height="223"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8q-Ia-xfM">
+                                <rect key="frame" x="94.5" y="325" width="131" height="223"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="8" maxX="15" maxY="8"/>
                                 <state key="normal" title="GET iOS SDK"/>
@@ -346,7 +347,7 @@ or stored on device</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="V8q-Ia-xfM" firstAttribute="centerX" secondItem="BpN-nk-asX" secondAttribute="centerX" id="2W7-ZZ-zIE"/>
                             <constraint firstItem="rRp-JN-aGi" firstAttribute="top" secondItem="V8q-Ia-xfM" secondAttribute="bottom" constant="20" id="Akz-0q-CLY"/>
@@ -382,7 +383,7 @@ or stored on device</string>
                                 <rect key="frame" x="0.0" y="393.5" width="320" height="174.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAY.CARDS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p46-ry-Mmy">
-                                        <rect key="frame" x="100" y="15" width="120" height="26.5"/>
+                                        <rect key="frame" x="101" y="15" width="118.5" height="26.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -407,7 +408,7 @@ or stored on device</string>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGL-lj-erz">
                                         <rect key="frame" x="0.0" y="348.5" width="320" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="5d8-ev-ll9">
                                                 <userDefinedRuntimeAttributes>
@@ -431,7 +432,7 @@ or stored on device</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YLr-jS-w4i" secondAttribute="trailing" id="42e-CO-rvB"/>
                             <constraint firstItem="A7V-Vo-UNS" firstAttribute="top" secondItem="YLr-jS-w4i" secondAttribute="bottom" id="5Wo-f8-s86"/>
@@ -471,7 +472,7 @@ or stored on device</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="Transparent" id="yAS-2Z-wpT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="barTintColor" systemColor="systemBackgroundColor"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -486,5 +487,11 @@ or stored on device</string>
     <resources>
         <image name="Transparent" width="30" height="30"/>
         <image name="iPhoneWithCard" width="154" height="313"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

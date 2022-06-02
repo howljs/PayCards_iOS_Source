@@ -3,6 +3,7 @@
 
 #import <UIKit/UIKit.h>
 
+dispatch_queue_attr_t GPUImageDefaultQueueAttribute(void);
 void runOnMainQueueWithoutDeadlocking(void (^block)(void));
 void runSynchronouslyOnVideoProcessingQueue(void (^block)(void));
 void runAsynchronouslyOnVideoProcessingQueue(void (^block)(void));

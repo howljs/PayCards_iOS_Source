@@ -129,8 +129,6 @@ using namespace std;
 
 @property (nonatomic, strong) UILabel *recognizedDateLabel;
 
-@property (nonatomic, strong) UIButton *copyrightButton;
-
 @property (nonatomic, assign) PayCardsRecognizerResultMode resultMode;
 
 @property (nonatomic, assign) PayCardsRecognizerMode recognizerMode;
@@ -139,15 +137,17 @@ using namespace std;
 
 @property (nonatomic) int bytesPerRow;
 
+@property (nonatomic) BOOL isShowLayer;
+
 @end
 
 @implementation PayCardsRecognizer
 
-- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor {
-    return [self initWithDelegate:delegate recognizerMode:(PayCardsRecognizerDataMode)(PayCardsRecognizerDataModeNumber|PayCardsRecognizerDataModeDate|PayCardsRecognizerDataModeName|PayCardsRecognizerDataModeGrabCardImage) resultMode:resultMode container:container frameColor: frameColor];
+- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor isShowLayer:(BOOL)isShowLayer {
+    return [self initWithDelegate:delegate recognizerMode:(PayCardsRecognizerDataMode)(PayCardsRecognizerDataModeNumber|PayCardsRecognizerDataModeDate|PayCardsRecognizerDataModeName|PayCardsRecognizerDataModeGrabCardImage) resultMode:resultMode container:container frameColor: frameColor isShowLayer:isShowLayer];
 }
 
-- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate recognizerMode:(PayCardsRecognizerDataMode)recognizerMode resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor {
+- (instancetype _Nonnull)initWithDelegate:(id<PayCardsRecognizerPlatformDelegate> _Nonnull)delegate recognizerMode:(PayCardsRecognizerDataMode)recognizerMode resultMode:(PayCardsRecognizerResultMode)resultMode container:(UIView * _Nonnull)container frameColor:(UIColor * _Nonnull)frameColor isShowLayer:(BOOL)isShowLayer {
     self = [super init];
     if (self) {
         
@@ -159,6 +159,7 @@ using namespace std;
         self.resultMode = resultMode;
         self.recognizerMode = recognizerModeInternal;
         self.frameColor = frameColor;
+        self.isShowLayer = isShowLayer;
         
         if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone && [[UIScreen mainScreen] bounds].size.height == 480) {
             _captureAreaWidth = 16;
@@ -256,15 +257,40 @@ using namespace std;
     self.recognizedNameLabel.text = @" ";
 }
 
+- (void)resetResult {
+    self.recognizedNumberLabel.text = @" ";
+    self.recognizedDateLabel.text = @" ";
+    self.recognizedNameLabel.text = @" ";
+    [self setIsIdle:NO];
+}
+
+- (void)updateFrameColor:(UIColor *)frameColor {
+    if ([self.frameColor isEqual:frameColor]) {
+        return;
+    }
+    self.frameColor = frameColor;
+    UIImage *image = [UIImage imageWithContentsOfFile:[self pathToResource:@"PortraitFrame.png"]];
+    
+    UIImage *newImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, newImage.scale);
+    [frameColor set];
+    [newImage drawInRect:CGRectMake(0, 0, image.size.width, newImage.size.height)];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.frameImageView.image = newImage;
+    self.edgesWrapperView.topEdge.backgroundColor = frameColor;
+    self.edgesWrapperView.bottomEdge.backgroundColor = frameColor;
+    self.edgesWrapperView.leftEdge.backgroundColor = frameColor;
+    self.edgesWrapperView.rightEdge.backgroundColor = frameColor;
+}
+
 - (void)startCamera {
     [self startCameraWithOrientation:UIInterfaceOrientationPortrait];
 }
 
 - (void)startCameraWithOrientation:(UIInterfaceOrientation)orientation {
-    
     [self.container addSubview:self.view];
     [self autoPinToContainer];
-    
     self.videoCamera.delegate = self;
     
     [self.videoCamera addTarget:self.view];
@@ -278,6 +304,10 @@ using namespace std;
 
 - (void)torchStatusDidChange:(BOOL)status {
     [self.videoCamera turnTorchOn:status withValue:0.1];
+}
+
+- (void)toggleFlash {
+    [self.videoCamera toggleFlash];
 }
 
 - (void)turnTorchOn:(BOOL)on withValue:(float)value {
@@ -319,7 +349,7 @@ using namespace std;
 
 - (void)highlightEdges:(DetectedLineFlags)edgeFlags {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             _edgesWrapperView.topEdge.alpha = edgeFlags&DetectedLineTopFlag ? 1. : 0.;
             _edgesWrapperView.bottomEdge.alpha = edgeFlags&DetectedLineBottomFlag ? 1. : 0.;
             _edgesWrapperView.leftEdge.alpha = edgeFlags&DetectedLineLeftFlag ? 1. : 0.;
@@ -443,6 +473,29 @@ using namespace std;
     _view.translatesAutoresizingMaskIntoConstraints = NO;
     _view.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     
+    //TODO: Need update
+    if(_isShowLayer) {
+        CALayer *backLayer = [[CALayer alloc] init];
+        CGRect bounds = _view.bounds;
+        CGFloat heightRatioAgainstWidth = 0.6328358209;
+        backLayer.frame = bounds;
+        backLayer.backgroundColor = [UIColor colorWithRed:38/255.0 green:38/255.0 blue:38/255.0 alpha:0.6].CGColor;
+        CGFloat captureWidth = _captureAreaWidth + 8;
+        CGFloat cuttedWidth = bounds.size.width - captureWidth;
+        CGFloat cuttedHeight = cuttedWidth * heightRatioAgainstWidth;
+        CGFloat centerVertical = bounds.size.height / 2.0;
+        CGFloat cuttedY = centerVertical - (cuttedHeight / 2.0);
+        CGFloat cuttedX = captureWidth / 2.0;
+        CGRect cuttedRect = CGRectMake(cuttedX, cuttedY, cuttedWidth, cuttedHeight);
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:cuttedRect cornerRadius:12.0];
+        [path appendPath:[UIBezierPath bezierPathWithRect:bounds]];
+        maskLayer.path = path.CGPath;
+        maskLayer.fillRule = kCAFillRuleEvenOdd;
+        backLayer.mask = maskLayer;
+        [_view.layer addSublayer:backLayer];
+    }
+    
     [_view addSubview:self.frameImageView];
     
     [_view addConstraintWithItem:self.frameImageView attribute:NSLayoutAttributeCenterX];
@@ -465,12 +518,6 @@ using namespace std;
     [_view addConstraintWithItem:self.labelsHolderView attribute:NSLayoutAttributeRight toItem:self.frameImageView];
     [_view addConstraintWithItem:self.labelsHolderView attribute:NSLayoutAttributeBottom toItem:self.frameImageView];
     [_view addConstraintWithItem:self.labelsHolderView attribute:NSLayoutAttributeLeft toItem:self.frameImageView];
-    
-    [_view addSubview:self.copyrightButton];
-    
-    [_view addConstraintWithItem:self.copyrightButton attribute:NSLayoutAttributeLeft toItem:_view attribute:NSLayoutAttributeLeft constant:8];
-    [_view addConstraintWithItem:self.copyrightButton attribute:NSLayoutAttributeBottom toItem:_view attribute:NSLayoutAttributeBottom constant:-4];
-    
     return _view;
 }
 
@@ -586,31 +633,6 @@ using namespace std;
     _recognizedNameLabel.adjustsFontSizeToFitWidth = YES;
     
     return _recognizedNameLabel;
-}
-
--(UIButton *)copyrightButton {
-    if (_copyrightButton) {
-        return _copyrightButton;
-    }
-    
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:10], NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5], NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Powered by pay.cards", "") attributes:attributes];
-    
-    _copyrightButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _copyrightButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_copyrightButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-    [_copyrightButton addTarget:self action:@selector(tapCopyright) forControlEvents:UIControlEventTouchUpInside];
-    
-    return _copyrightButton;
-}
-
-- (void)tapCopyright {
-    if (@available(iOS 10, *)) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pay.cards"] options:@{} completionHandler:^(BOOL success) {}];
-    } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pay.cards"]];
-    }
 }
 
 @end

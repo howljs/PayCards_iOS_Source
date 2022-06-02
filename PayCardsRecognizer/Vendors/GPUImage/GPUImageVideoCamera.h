@@ -148,6 +148,8 @@ extern NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString
 
 - (void)resetBenchmarkAverage;
 
+- (void)toggleFlash;
+
 - (void)turnTorchOn:(BOOL)on withValue:(float)value;
 - (void)setFixedFocuse:(float)position completion:(void (^)(CMTime syncTime))handler;
 //- (void)setExposureMode:(AVCaptureExposureMode)exposureMode;
